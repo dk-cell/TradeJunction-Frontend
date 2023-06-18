@@ -33,7 +33,7 @@ const AllUsers = () => {
     dispatch(getAllUsers());
   };
 
-  console.log("././", users);
+  // console.log("././", users);
 
   const columns = [
     { field: "id", headerName: "User ID", minWidth: 150, flex: 0.7 },

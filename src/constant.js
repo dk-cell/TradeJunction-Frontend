@@ -19,7 +19,7 @@ API.interceptors.request.use((req) => {
   if (localStorage.getItem("seller_token"))
     userToken = localStorage.getItem("seller_token");
   const token = userToken + " " + sellerToken;
-  console.log("tt->", token);
+  // console.log("tt->", token);
   req.headers.Authorization = `Bearer ${token}`;
 
   return req;

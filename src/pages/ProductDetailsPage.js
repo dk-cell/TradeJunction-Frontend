@@ -23,7 +23,7 @@ const ProductDetailsPage = () => {
       setData(data);
     } else {
       const data = allProducts && allProducts.find((i) => i._id === id);
-      console.log("----->", data);
+      // console.log("----->", data);
       setData(data);
       dispatch({ type: "setSearchedData", payload: "" });
     }

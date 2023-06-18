@@ -33,7 +33,7 @@ const AllSellers = () => {
     dispatch(getAllSellers());
   };
 
-  console.log(sellers);
+  // console.log(sellers);
 
   const columns = [
     { field: "id", headerName: "Seller ID", minWidth: 150, flex: 0.7 },
