@@ -2,19 +2,18 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "../../style/styles";
 
-const DropDown = (props) => {
+const DropDown = ({ categoriesData, setDropDown }) => {
   const navigate = useNavigate();
-  console.log(props);
   const handleSubmit = (item) => {
     navigate(`/products?category=${item.title}`);
-    props.setDropDown(false);
+    setDropDown(false);
     window.location.reload();
   };
   return (
     <>
       <div className="pb-4 w-[270px] bg-[#fff] absolute z-30 rounded-b-md shadow-sm">
-        {props.categoriesData &&
-          props.categoriesData.map((item, index) => (
+        {categoriesData &&
+          categoriesData.map((item, index) => (
             <div
               key={index}
               className={`${styles.normalFlex}`}
