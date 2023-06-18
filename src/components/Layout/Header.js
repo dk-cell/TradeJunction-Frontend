@@ -12,7 +12,7 @@ import { IoIosArrowDown, IoIosArrowForward } from "react-icons/io";
 import { BiMenuAltLeft } from "react-icons/bi";
 import DropDown from "./DropDown";
 import Navbar from "./Navbar";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Cart from "../cart/Cart";
 import Wishlist from "../wishlist/Wishlist";
 import { backendUrl, API } from "../../constant";
@@ -23,14 +23,15 @@ const Header = ({ activeHeader }) => {
   const { isSeller } = useSelector((state) => state.seller);
   const { cart } = useSelector((state) => state.carts);
   const { wishlist } = useSelector((state) => state.wishlists);
-  const { allProducts } = useSelector((state) => state.products);
+  const { allProducts, searchedData } = useSelector((state) => state.products);
   const [searchItem, setSearchItem] = useState("");
-  const [searchedData, setSearchedData] = useState(null);
+  // const [searchedData, setSearchedData] = useState(null);
   const [active, setActive] = useState(false);
   const [dropDown, setDropDown] = useState(false);
   const [openCart, setOpenCart] = useState(false);
   const [openWishlist, setWishlist] = useState(false);
   const [open, setOpen] = useState(false);
+  const dispatch = useDispatch();
 
   window.addEventListener("scroll", () => {
     if (window.scrollY > 70) {
@@ -48,7 +49,7 @@ const Header = ({ activeHeader }) => {
       allProducts.filter((item) =>
         item.name.toLowerCase().includes(search.toLowerCase())
       );
-    setSearchedData(fileredData);
+    dispatch({ type: "setSearchedData", payload: fileredData });
   };
   return (
     <>
@@ -67,7 +68,6 @@ const Header = ({ activeHeader }) => {
             <input
               type="text"
               placeholder="search product..."
-              value={searchedData}
               onChange={handleSearch}
               className="h-[40px] w-full px-2 border-[#3957db] border-[2px] rounded"
             />
@@ -80,9 +80,11 @@ const Header = ({ activeHeader }) => {
                 {searchedData &&
                   searchedData.map((item, key) => {
                     const d = item.name;
-                    // const product_name = d.replace(/\s+/g, "-");
                     return (
-                      <Link to={`/product/${item._id}`}>
+                      <Link
+                        to={`/product/${item._id}`}
+                        onClick={() => setOpen(false)}
+                      >
                         <div className="w-full flex items-start-py-3">
                           <img
                             src={`${backendUrl}${item.images[0]}`}
@@ -136,7 +138,7 @@ const Header = ({ activeHeader }) => {
             </div>
           </div>
           {/* Nav */}
-          <div className={`${styles.normalFlex}`}>
+          <div className={`${styles.normalFlex} h-[70px]`}>
             <Navbar active={activeHeader} />
           </div>
 
@@ -261,7 +263,6 @@ const Header = ({ activeHeader }) => {
                   type="search"
                   placeholder="Search Product..."
                   className="h-[40px] w-full px-2 border-[#3957db] border-[2px] rounded-md"
-                  value={searchItem}
                   onChange={handleSearch}
                 />
                 {searchedData && (
@@ -271,10 +272,13 @@ const Header = ({ activeHeader }) => {
 
                       // const Product_name = d.replace(/\s+/g, "-");
                       return (
-                        <Link to={`/product/${i._id}`}>
+                        <Link
+                          to={`/product/${i._id}`}
+                          onClick={() => setOpen(false)}
+                        >
                           <div className="flex items-center">
                             <img
-                              src={i.image_Url[0].url}
+                              src={`${backendUrl}${i?.images[0]}`}
                               alt=""
                               className="w-[50px] mr-2"
                             />

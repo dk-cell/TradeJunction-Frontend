@@ -12,7 +12,7 @@ export const createevent = (newForm) => async (dispatch) => {
     const { data } = await API.post(`/event/create-event`, newForm, config);
     dispatch({
       type: "eventCreateSuccess",
-      payload: data.event,
+      payload: data?.event,
     });
   } catch (error) {
     dispatch({
@@ -32,12 +32,12 @@ export const getAllEventsShop = (id) => async (dispatch) => {
     const { data } = await API.get(`/event/get-all-events/${id}`);
     dispatch({
       type: "getAlleventsShopSuccess",
-      payload: data.events,
+      payload: data?.events,
     });
   } catch (error) {
     dispatch({
       type: "getAlleventsShopFailed",
-      payload: error.response.data.message,
+      payload: error.response.data?.message,
     });
   }
 };
@@ -55,12 +55,12 @@ export const deleteEvent = (id) => async (dispatch) => {
 
     dispatch({
       type: "deleteeventSuccess",
-      payload: data.message,
+      payload: data?.message,
     });
   } catch (error) {
     dispatch({
       type: "deleteeventFailed",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message,
     });
   }
 };

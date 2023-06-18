@@ -12,12 +12,12 @@ export const createProduct = (newForm) => async (dispatch) => {
     const { data } = await API.post(`/product/create-product`, newForm, config);
     dispatch({
       type: "productCreateSuccess",
-      payload: data.product,
+      payload: data?.product,
     });
   } catch (error) {
     dispatch({
       type: "productCreateFail",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message,
     });
   }
 };
@@ -32,12 +32,12 @@ export const getAllProductsOfShop = (id) => async (dispatch) => {
     const { data } = await API.get(`/product/get-all-products-shop/${id}`);
     dispatch({
       type: "getAllProductsShopSuccess",
-      payload: data.products,
+      payload: data?.products,
     });
   } catch (error) {
     dispatch({
       type: "getAllProductsShopFailed",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message,
     });
   }
 };
@@ -55,12 +55,12 @@ export const deleteProduct = (id) => async (dispatch) => {
 
     dispatch({
       type: "deleteProductSuccess",
-      payload: data.message,
+      payload: data?.message,
     });
   } catch (error) {
     dispatch({
       type: "deleteProductFailed",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message,
     });
   }
 };
@@ -75,12 +75,12 @@ export const getAllProducts = () => async (dispatch) => {
     const { data } = await API.get(`/product/get-all-products`);
     dispatch({
       type: "getAllProductsSuccess",
-      payload: data.products,
+      payload: data?.products,
     });
   } catch (error) {
     dispatch({
       type: "getAllProductsFailed",
-      payload: error.response.data.message,
+      payload: error.response?.data?.message,
     });
   }
 };

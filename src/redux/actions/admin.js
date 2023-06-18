@@ -14,12 +14,12 @@ export const getAllUsers = () => async (dispatch) => {
   
       dispatch({
         type: "getAllUsersSuccess",
-        payload: data.users,
+        payload: data?.users,
       });
     } catch (error) {
       dispatch({
         type: "getAllUsersFailed",
-        payload: error.response.data.message,
+        payload: error.response.data?.message,
       });
     }
   };
@@ -37,7 +37,7 @@ export const getAllOrdersOfAdmin = () => async (dispatch) => {
 
     dispatch({
       type: "adminAllOrdersSuccess",
-      payload: data.orders,
+      payload: data?.orders,
     });
   } catch (error) {
     dispatch({
@@ -60,7 +60,7 @@ export const getAllSellers = () => async (dispatch) => {
 
     dispatch({
       type: "getAllSellersSuccess",
-      payload: data.sellers,
+      payload: data?.sellers,
     });
   } catch (error) {
     dispatch({

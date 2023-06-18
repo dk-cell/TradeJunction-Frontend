@@ -12,14 +12,16 @@ export const API = axios.create({
 });
 
 API.interceptors.request.use((req) => {
-  if (localStorage.getItem("token") || localStorage.getItem("seller_token")) {
-    const token =
-      `${JSON.parse(localStorage.getItem("token"))}` +
-      " " +
-      `${localStorage.getItem("seller_token")}`;
-    console.log("tt->", token);
-    req.headers.Authorization = `Bearer ${token}`;
-  }
+  let userToken = "userToken";
+  let sellerToken = "sellerToken";
+  if (localStorage.getItem("token"))
+    userToken = JSON.parse(localStorage.getItem("token"));
+  if (localStorage.getItem("seller_token"))
+    userToken = localStorage.getItem("seller_token");
+  const token = userToken + " " + sellerToken;
+  console.log("tt->", token);
+  req.headers.Authorization = `Bearer ${token}`;
+
   return req;
 });
 

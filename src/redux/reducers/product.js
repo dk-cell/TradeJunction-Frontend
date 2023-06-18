@@ -2,9 +2,15 @@ import { createReducer } from "@reduxjs/toolkit";
 
 const initialState = {
   isLoading: true,
+  searchedData: "",
 };
 
 export const productReducer = createReducer(initialState, {
+  
+  setSearchedData: (state, action) => {
+    state.searchedData = action.payload;
+  },
+
   productCreateRequest: (state) => {
     state.isLoading = true;
   },

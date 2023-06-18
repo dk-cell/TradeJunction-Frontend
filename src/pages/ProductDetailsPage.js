@@ -5,28 +5,29 @@ import Footer from "../components/Layout/Footer.js";
 import ShowRelatedProduct from "../components/ShowRelatedProduct";
 import { useParams, useSearchParams } from "react-router-dom";
 import { product } from "../static/data.js";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 const ProductDetailsPage = () => {
-  const { allProducts } = useSelector((state) => state.products);
+  const { allProducts, seachedData } = useSelector((state) => state.products);
   const { allEvents } = useSelector((state) => state.events);
   const { id } = useParams();
   const [data, setData] = useState(null);
   const [searchParams] = useSearchParams();
   const eventData = searchParams.get("isEvent");
-
- 
+  const dispatch = useDispatch();
 
   // const productName = name.replace(/-/g, " ");
-console.log(id)
+  console.log(id);
   useEffect(() => {
     if (eventData) {
       const data = allEvents && allEvents.find((i) => i._id === id);
       setData(data);
     } else {
       const data = allProducts && allProducts.find((i) => i._id === id);
+      console.log("----->", data);
       setData(data);
+      dispatch({ type: "setSearchedData", payload: "" });
     }
-  }, [allProducts]);
+  }, [allProducts, id]);
   return (
     <div>
       <Header />
