@@ -19,9 +19,9 @@ const ProfileSidebar = ({ active, setActive }) => {
   function handleLogout() {
     API.get(`/user/logout`)
       .then((res) => {
-        localStorage.clear();
+        localStorage.removeItem("token");
         toast.success(res.data.message);
-        navigate("/login");
+        navigate("/");
         window.location.reload(true);
       })
       .catch((err) => toast.error(err.response.data.message));

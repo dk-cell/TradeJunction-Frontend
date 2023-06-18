@@ -16,18 +16,15 @@ const ShopLogin = () => {
     await API
       .post(
         `/shop/login-seller`,
-        { email, password },
-        { withCredential: true }
+        { email, password }
       )
       .then((res) => {
         toast.success("Login Succcess!!");
-
-        cookies.set("seller_token", res.data.token);
-        localStorage.setItem("seller_token", res.data.token);
+        localStorage.setItem("seller_token", res?.data?.token);
         navigate("/");
         window.location.reload(true);
       })
-      .catch((err) => toast.error(err.response.data.message));
+      .catch((err) => toast.error(err.response?.data.message));
   };
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg::px-8">

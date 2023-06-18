@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styles from "../../style/styles";
 import Loader from "../../Loader";
 import { useDispatch, useSelector } from "react-redux";
@@ -12,6 +12,7 @@ const ShopInfo = ({ isOwner }) => {
   const { products } = useSelector((state) => state.products);
   const [isLoading, setIsLoading] = useState(false);
   const { id } = useParams();
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getAllProductsOfShop(id));
@@ -28,11 +29,11 @@ const ShopInfo = ({ isOwner }) => {
   }, []);
 
   const logoutHandler = async () => {
-    console.log("YEDSSS")
     API.get(`/shop/logout`).then((res) => {
-      localStorage.clear();
+      localStorage.removeItem("seller_token");
+      navigate("/");
+      window.location.reload(true);
     });
-    window.location.reload();
   };
 
   const totalReviewsLength =

@@ -27,9 +27,7 @@ export const getSellerDetails = () => async (dispatch) => {
     dispatch({
       type: "LoadSellerRequest",
     });
-    const { data } = await API.get(`/shop/get-seller-details`, {
-      withCredentials: true,
-    });
+    const { data } = await API.get(`/shop/get-seller-details`);
     dispatch({
       type: "LoadSellerSuccess",
       payload: data?.seller,

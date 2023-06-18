@@ -1,7 +1,7 @@
 import axios from "axios";
 import Cookies from "universal-cookie";
 
-// export const baseUrl = "";
+// export const baseUrl = "http://localhost:8000/api/v2";
 // export const backendUrl = "http://localhost:8000/";
 
 // export const baseUrl = "https://tradejunction-backend.onrender.com/api/v2";
@@ -17,7 +17,8 @@ API.interceptors.request.use((req) => {
   if (localStorage.getItem("token"))
     userToken = JSON.parse(localStorage.getItem("token"));
   if (localStorage.getItem("seller_token"))
-    userToken = localStorage.getItem("seller_token");
+    sellerToken = localStorage.getItem("seller_token");
+
   const token = userToken + " " + sellerToken;
   // console.log("tt->", token);
   req.headers.Authorization = `Bearer ${token}`;
